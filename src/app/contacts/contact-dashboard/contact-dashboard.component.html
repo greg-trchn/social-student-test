@@ -1,3 +1,42 @@
 <p>
   contact-dashboard works!
 </p>
+
+<h1>{{ title }}</h1>
+
+
+<p [title]="title">{{ counter }}</p>
+
+
+
+<ion-button [disabled]="counter > 5" (click)="increment()">Increment counter</ion-button>
+
+<!-- <ul>
+  <li *ngFor="let student of students">
+    {{ student.name }}
+  </li>
+</ul> -->
+
+
+<!-- <ul>
+  <li *ngFor="let contact of contacts">
+    {{ contact.name }}
+    <ion-icon color="success" name="add-circle-outline"></ion-icon>
+    <ion-icon color="danger" name="trash-outline"></ion-icon>
+  </li>
+</ul> -->
+
+<ion-card *ngFor="let contact of contacts">
+  <ion-card-header>
+    <ion-card-subtitle [style.color]="contact.accept === false ? 'orange': 'white'">{{contact.name}}</ion-card-subtitle>
+    <ion-card-title>
+
+      <a (click)="delete(contact.id)"><ion-icon color="danger" name="trash-outline"></ion-icon></a>
+
+      <ng-container *ngIf="contact.accept === false">
+        <a (click)="validate(contact)"><ion-icon color="success" name="add-circle-outline"></ion-icon></a> 
+      </ng-container>
+
+    </ion-card-title>
+  </ion-card-header>
+</ion-card>
