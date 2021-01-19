@@ -1,10 +1,52 @@
-<ion-app>
+<!-- <ion-app> -->
+<!-- <app-toolbar [title]=" 'Login' "></app-toolbar> -->
+<app-toolbar [title]="titre"></app-toolbar>
+
+<ion-content class="ion-padding">
+  <h1>Login</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <ion-item *ngIf="error">
+      <ion-text color="danger">
+        {{ error }}
+      </ion-text>
+      <!-- <ion-text color="danger" [ngSwitch]="error.status">
+        <span *ngSwitchCase="404">Incorrect email or password</span>
+        <span *ngSwitchDefault>An error has occurred, please try again</span>
+      </ion-text> -->
+      <!-- <ion-text color="danger" *ngIf="error.status === 400">
+        Incorrect email or password
+      </ion-text> -->
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+      <ion-text color="danger" *ngIf="!loginForm.get('email').valid && loginForm.get('email').dirty">
+          <span *ngIf="loginForm.get('email').hasError('email')">Please enter a valid email</span>
+          <span *ngIf="loginForm.get('email').hasError('required')">Email is required</span>
+      </ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-text color="danger" *ngIf="loginForm.get('password').dirty && !loginForm.get('password').valid">
+        Password is required
+      </ion-text>
+    </ion-item>
+    <br />
+    <div *ngIf="!loadingService.login">
+      <ion-button type="submit" [disabled]="!loginForm.valid">Submit</ion-button>
+      <!-- <ion-button type="submit">Submit</ion-button> -->
+    </div>
+    <div *ngIf="loadingService.login">
+      <ion-spinner name="bubbles"></ion-spinner>
+    </div>
+
+  </form>
 
 
-  <ion-content class="ion-padding">
-    <h1>Connexion</h1>
-    <ion-button routerLink="/auth/login">login</ion-button>
-  </ion-content>
+</ion-content>
 
-</ion-app>
+<!-- </ion-app> -->
 
+<!-- <ion-button routerLink="/auth/login">login</ion-button> -->

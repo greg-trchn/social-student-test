@@ -7,6 +7,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { EntryComponent } from './entry/entry.component';
 import { SharedModule } from '../shared/shared.module';
+import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
+import { RepeatedPasswordDirective } from './shared/validators/repeated-password.directive';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,12 +19,19 @@ import { SharedModule } from '../shared/shared.module';
     AuthorizationsComponent,
     LoginComponent,
     RegisterComponent,
-    EntryComponent
+    EntryComponent,
+    ToolbarComponent,
+    RepeatedPasswordDirective
   ],
   imports: [
     CommonModule,
     SharedModule,
-    AuthorizationsRoutingModule
+    AuthorizationsRoutingModule,
+    // ReactiveFormsModule
+  ],
+  providers: [
+    // FormBuilder
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true }
   ]
 })
 export class AuthorizationsModule { }

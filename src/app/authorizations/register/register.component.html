@@ -1,3 +1,49 @@
-<p>
-  register works!
-</p>
+<!-- <ion-app> -->
+<app-toolbar [title]=" 'Register' "></app-toolbar>
+
+<ion-content class="ion-padding">
+  <h1>Register</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+      <ion-text color="danger" *ngIf="!registerForm.get('username').valid && registerForm.get('username').dirty">
+        <span *ngIf="registerForm.get('username').hasError('required')">Please enter a valid username.</span>
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+      <ion-text color="danger" *ngIf="!registerForm.get('email').valid && registerForm.get('email').dirty">
+        <span *ngIf="registerForm.get('email').hasError('email')">Please enter a valid email</span>
+        <span *ngIf="registerForm.get('email').hasError('required')">Email is required</span>
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+      <ion-text color="danger" *ngIf="registerForm.get('password').dirty && !registerForm.get('password').valid">
+        Password is required
+      </ion-text>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirm Password</ion-label>
+      <ion-input type="password" formControlName="confirm"></ion-input>
+      <ion-text color="danger" *ngIf="registerForm.get('confirm').dirty && !registerForm.get('confirm').valid">
+        Please confirm your password
+      </ion-text>
+    </ion-item>
+
+    <br />
+    <ion-button type="submit" [disabled]="!registerForm.valid">Submit</ion-button>
+    <!-- <ion-button type="submit">Submit</ion-button> -->
+  </form>
+
+
+</ion-content>
+
+<!-- </ion-app> -->
